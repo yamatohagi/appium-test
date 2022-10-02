@@ -28,3 +28,6 @@ info AppiumDoctor ### Diagnostic for optional dependencies completed, no fix pos
 info AppiumDoctor
 info AppiumDoctor Everything looks good, bye!
 info AppiumDoctor
+
+appium --address 0.0.0.0 --base-path /wd/hub
+python3 main.py
