@@ -1,9 +1,5 @@
-import os
-import sys
 import unittest
-import socket
 
-from time import sleep
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
 from appium import webdriver
@@ -22,7 +18,7 @@ class AppiumTest(unittest.TestCase):
             "automationName": "XCUITest",
             "startIWDP": "true",
             "showXcodeLog": "true",
-            "bundleId": "com.yudo.SaitouSan",  # ここを編集
+            "bundleId": "com.yudo.SaitouSan",
             "udid": "00008101-001254320191001E",
             "xcodeOrgId": "CUYU636622",
             "xcodeSigningId": "iPhone Developer",
