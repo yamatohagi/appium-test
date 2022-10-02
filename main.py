@@ -34,9 +34,7 @@ class AppiumTest(unittest.TestCase):
         ipaddress = "0.0.0.0"
         port = "4723"
         path = "/wd/hub"
-        self.driver = webdriver.Remote(
-            f"{protocol}://{ipaddress}:{port}{path}", options
-        )
+        self.driver = webdriver.Remote(f"{protocol}://{ipaddress}:{port}{path}", options)
 
     def tearDown(self):
         self.driver.quit()
@@ -47,42 +45,35 @@ class AppiumTest(unittest.TestCase):
         if news_el:
             TouchAction(self.driver).tap(None, 200, 380, 1).perform()  # 斉藤さんと話すボタン
             # 電話とカメラ封印電話を選択するところ
-            camera_off_button_el = self.driver.find_element(
-                "accessibility id", "bt talk disable camera off"
-            )
+            camera_off_button_el = self.driver.find_element("accessibility id", "bt talk disable camera off")
             TouchAction(self.driver).tap(camera_off_button_el, 1).perform()
 
             i = 0
 
             while i < 1000:
-                WebDriverWait(self.driver, 30).until(
-                    EC.presence_of_element_located((By.ID, "相手にコールして通話しよう♪"))
-                )
+                WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "斉藤さん歴")))
 
                 try:
                     self.driver.find_element("accessibility id", "通話が開始できませんでした")
+                    TouchAction(self.driver).tap(None, 100, 360, 1).perform()  # 別の人と話す
                     TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
                 except:
                     try:
                         self.driver.find_element("accessibility id", "男")
-                        TouchAction(self.driver).tap(
-                            None, 100, 360, 1
-                        ).perform()  # 別の人と話す
-                        TouchAction(self.driver).tap(
-                            None, 250, 460, 1
-                        ).perform()  # もう一回
+                        TouchAction(self.driver).tap(None, 100, 360, 1).perform()  # 別の人と話す
+                        TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
                     except:
-                        TouchAction(self.driver).tap(
-                            None, 270, 360, 1
-                        ).perform()  # 通話する
-                        TouchAction(self.driver).tap(
-                            None, 250, 460, 1
-                        ).perform()  # もう一回
+                        TouchAction(self.driver).tap(None, 270, 360, 1).perform()  # 通話する
+                        TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
+
+                        try:
+                            self.driver.find_element("accessibility id", "通話が開始できませんでした")
+                            TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
+                        except:
+                            sleep(100000)
 
             print(i)
             i += 1
-
-        sleep(100000)
 
 
 if __name__ == "__main__":
