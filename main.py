@@ -51,26 +51,18 @@ class AppiumTest(unittest.TestCase):
             i = 0
 
             while i < 1000:
-                WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, "斉藤さん歴")))
+                WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.ID, "斉藤さん歴")))
 
                 try:
-                    self.driver.find_element("accessibility id", "通話が開始できませんでした")
+                    self.driver.find_element("accessibility id", "男")
                     TouchAction(self.driver).tap(None, 100, 360, 1).perform()  # 別の人と話す
                     TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
                 except:
-                    try:
-                        self.driver.find_element("accessibility id", "男")
-                        TouchAction(self.driver).tap(None, 100, 360, 1).perform()  # 別の人と話す
-                        TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
-                    except:
-                        TouchAction(self.driver).tap(None, 270, 360, 1).perform()  # 通話する
-                        TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
+                    TouchAction(self.driver).tap(None, 270, 360, 1).perform()  # 通話する
 
-                        try:
-                            self.driver.find_element("accessibility id", "通話が開始できませんでした")
-                            TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
-                        except:
-                            sleep(100000)
+                    WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.ID, "通話が開始できませんでした")))
+                    TouchAction(self.driver).tap(None, 100, 360, 1).perform()  # 別の人と話す
+                    TouchAction(self.driver).tap(None, 250, 460, 1).perform()  # もう一回
 
             print(i)
             i += 1
